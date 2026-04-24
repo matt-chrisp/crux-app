@@ -184,57 +184,178 @@
             border-top: 1px solid rgba(26, 26, 24, 0.08);
         }
 
-        /* ========== HOW IT WORKS ========== */
+        /* ========== HOW IT WORKS (PRODUCT TOUR) ========== */
 
         .how-it-works {
             border-top: 1px solid rgba(26, 26, 24, 0.08);
         }
 
-        .stages {
+        .tour-layout {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
             margin-top: 48px;
         }
 
-        .stage-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 28px 22px;
-            text-align: center;
-            border: 1px solid rgba(26, 26, 24, 0.06);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .tour-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
 
-        .stage-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(26, 26, 24, 0.06);
+        .tour-tab {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 20px 20px 24px;
+            background: none;
+            border: none;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.2s, border-color 0.2s;
+            border-radius: 0 10px 10px 0;
         }
 
-        .stage-number {
+        .tour-tab:hover {
+            background: rgba(196, 149, 90, 0.06);
+        }
+
+        .tour-tab:focus-visible {
+            outline: 2px solid #c4955a;
+            outline-offset: -2px;
+        }
+
+        .tour-tab[aria-selected="true"] {
+            border-left-color: #c4955a;
+            background: rgba(196, 149, 90, 0.08);
+        }
+
+        .tour-tab-number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: rgba(26, 26, 24, 0.06);
+            color: #5a5a56;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tour-tab[aria-selected="true"] .tour-tab-number {
+            background: #c4955a;
+            color: #fff;
+        }
+
+        .tour-tab-text h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.15rem;
+            color: #1a1a18;
+            margin-bottom: 2px;
+            font-weight: 400;
+        }
+
+        .tour-tab[aria-selected="true"] .tour-tab-text h3 {
+            color: #1a1a18;
+        }
+
+        .tour-tab-text p {
+            font-size: 0.9rem;
+            color: #5a5a56;
+            line-height: 1.5;
+        }
+
+        /* Phone frame */
+        .tour-phone {
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 280px;
+            aspect-ratio: 9 / 19.5;
+            border-radius: 40px;
+            border: 4px solid #1a1a18;
+            background: #1a1a18;
+            box-shadow: 0 24px 48px rgba(26, 26, 24, 0.12), 0 8px 16px rgba(26, 26, 24, 0.08);
+            overflow: hidden;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: #1a1a18;
+            border-radius: 0 0 20px 20px;
+            z-index: 2;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 36px;
+            overflow: hidden;
+            background: #f8f6f1;
+        }
+
+        .tour-screenshot {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tour-screenshot.active {
+            opacity: 1;
+        }
+
+        .tour-screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tour-screenshot .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, #eae7df 0%, #ddd9cf 100%);
+            color: #5a5a56;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .tour-screenshot .placeholder .placeholder-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: #c4955a;
             color: #fff;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .stage-card h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
-
-        .stage-card p {
-            font-size: 0.9rem;
-            color: #5a5a56;
-            line-height: 1.55;
+            margin-bottom: 12px;
         }
 
         /* ========== DIFFERENT ========== */
@@ -375,8 +496,42 @@
         /* ========== RESPONSIVE ========== */
 
         @media (max-width: 900px) {
-            .stages {
-                grid-template-columns: repeat(3, 1fr);
+            .tour-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .tour-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                padding-bottom: 4px;
+            }
+
+            .tour-tab {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                border-radius: 10px 10px 0 0;
+                padding: 16px 20px;
+                min-width: 120px;
+                flex-shrink: 0;
+            }
+
+            .tour-tab[aria-selected="true"] {
+                border-left-color: transparent;
+                border-bottom-color: #c4955a;
+            }
+
+            .tour-tab-text p {
+                display: none;
+            }
+
+            .phone-frame {
+                width: 240px;
             }
 
             .diff-cards {
@@ -416,8 +571,24 @@
                 display: block;
             }
 
-            .stages {
-                grid-template-columns: 1fr 1fr;
+            .tour-tab {
+                min-width: 100px;
+                padding: 12px 14px;
+            }
+
+            .tour-tab-number {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+                font-size: 0.75rem;
+            }
+
+            .tour-tab-text h3 {
+                font-size: 1rem;
+            }
+
+            .phone-frame {
+                width: 220px;
             }
 
             .signup-form {
@@ -461,7 +632,7 @@
     <!-- WHY CRUX -->
     <section class="why-crux">
         <div class="container">
-            <h2 class="section-heading">Why Crux instead of ChatGPT?</h2>
+            <h2 class="section-heading">Why Crux instead of a Chatbot?</h2>
             <p class="section-body">Chatbots give answers. Crux helps you think. Where a general AI will happily tell you what to do, Crux uses a structured five-stage framework to draw out your own thinking, challenge your assumptions, and surface the trade-offs you're actually weighing.</p>
         </div>
     </section>
@@ -470,31 +641,70 @@
     <section id="how-it-works" class="how-it-works">
         <div class="container">
             <h2 class="section-heading">A structured way to think through any decision</h2>
-            <div class="stages">
-                <div class="stage-card">
-                    <div class="stage-number">1</div>
-                    <h3>Build</h3>
-                    <p>Map your options</p>
+            <div class="tour-layout">
+                <div class="tour-tabs" role="tablist" aria-label="Product tour stages">
+                    <button class="tour-tab" role="tab" aria-selected="true" aria-controls="screen-build" data-stage="build">
+                        <span class="tour-tab-number">1</span>
+                        <div class="tour-tab-text">
+                            <h3>Build</h3>
+                            <p>Map your options</p>
+                        </div>
+                    </button>
+                    <button class="tour-tab" role="tab" aria-selected="false" aria-controls="screen-assess" data-stage="assess">
+                        <span class="tour-tab-number">2</span>
+                        <div class="tour-tab-text">
+                            <h3>Assess</h3>
+                            <p>Analyse upsides, downsides, and trade-offs</p>
+                        </div>
+                    </button>
+                    <button class="tour-tab" role="tab" aria-selected="false" aria-controls="screen-test" data-stage="test">
+                        <span class="tour-tab-number">3</span>
+                        <div class="tour-tab-text">
+                            <h3>Test</h3>
+                            <p>Stress-test your thinking</p>
+                        </div>
+                    </button>
+                    <button class="tour-tab" role="tab" aria-selected="false" aria-controls="screen-decide" data-stage="decide">
+                        <span class="tour-tab-number">4</span>
+                        <div class="tour-tab-text">
+                            <h3>Decide</h3>
+                            <p>Compare what survives</p>
+                        </div>
+                    </button>
+                    <button class="tour-tab" role="tab" aria-selected="false" aria-controls="screen-commit" data-stage="commit">
+                        <span class="tour-tab-number">5</span>
+                        <div class="tour-tab-text">
+                            <h3>Commit</h3>
+                            <p>Own your decision with clear reasoning</p>
+                        </div>
+                    </button>
                 </div>
-                <div class="stage-card">
-                    <div class="stage-number">2</div>
-                    <h3>Assess</h3>
-                    <p>Analyse upsides, downsides, and trade-offs</p>
-                </div>
-                <div class="stage-card">
-                    <div class="stage-number">3</div>
-                    <h3>Test</h3>
-                    <p>Stress-test your thinking</p>
-                </div>
-                <div class="stage-card">
-                    <div class="stage-number">4</div>
-                    <h3>Decide</h3>
-                    <p>Compare what survives</p>
-                </div>
-                <div class="stage-card">
-                    <div class="stage-number">5</div>
-                    <h3>Commit</h3>
-                    <p>Own your decision with clear reasoning</p>
+                <div class="tour-phone">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div id="screen-build" class="tour-screenshot active" role="tabpanel">
+                                <img src="screenshots/tour-build.png" alt="Build stage — mapping your decision options in Crux" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder" style="display:none"><span class="placeholder-number">1</span>Build screenshot</div>
+                            </div>
+                            <div id="screen-assess" class="tour-screenshot" role="tabpanel">
+                                <img src="screenshots/tour-assess.png" alt="Assess stage — analysing upsides, downsides, and trade-offs" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder" style="display:none"><span class="placeholder-number">2</span>Assess screenshot</div>
+                            </div>
+                            <div id="screen-test" class="tour-screenshot" role="tabpanel">
+                                <img src="screenshots/tour-test.png" alt="Test stage — stress-testing your thinking" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder" style="display:none"><span class="placeholder-number">3</span>Test screenshot</div>
+                            </div>
+                            <div id="screen-decide" class="tour-screenshot" role="tabpanel">
+                                <img src="screenshots/tour-decide.png" alt="Decide stage — comparing what survives" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder" style="display:none"><span class="placeholder-number">4</span>Decide screenshot</div>
+                            </div>
+                            <div id="screen-commit" class="tour-screenshot" role="tabpanel">
+                                <img src="screenshots/tour-commit.png" alt="Commit stage — owning your decision with clear reasoning" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder" style="display:none"><span class="placeholder-number">5</span>Commit screenshot</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -550,9 +760,47 @@
                 <li><a href="EULA.html">Terms of Use</a></li>
                 <li><a href="mailto:hello@cruxapp.io">Contact</a></li>
             </ul>
-            <p class="copyright">&copy; 2025 Crux. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 Crux. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- TOUR INTERACTION -->
+    <script>
+        (function() {
+            var tabs = document.querySelectorAll('.tour-tab');
+            var screens = document.querySelectorAll('.tour-screenshot');
+
+            tabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var stage = this.getAttribute('data-stage');
+
+                    tabs.forEach(function(t) { t.setAttribute('aria-selected', 'false'); });
+                    this.setAttribute('aria-selected', 'true');
+
+                    screens.forEach(function(s) { s.classList.remove('active'); });
+                    document.getElementById('screen-' + stage).classList.add('active');
+                });
+
+                tab.addEventListener('keydown', function(e) {
+                    var tabArray = Array.from(tabs);
+                    var index = tabArray.indexOf(this);
+                    var next = -1;
+
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                        next = (index + 1) % tabArray.length;
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                        next = (index - 1 + tabArray.length) % tabArray.length;
+                    }
+
+                    if (next >= 0) {
+                        e.preventDefault();
+                        tabArray[next].focus();
+                        tabArray[next].click();
+                    }
+                });
+            });
+        })();
+    </script>
 
 </body>
 </html>
